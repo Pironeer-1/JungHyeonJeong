@@ -76,8 +76,9 @@ public class Game {
                 Player player = playerList.get(i);
                 playerAction.attack(player, enemy, i);
 
-                if(enemy.hp == 0) break;
+                if(enemy.hp <= 0) break;
             }
+            if(enemy.hp <= 0) break;
 
             //적의 반격
             Player targetPlayer = selectTargetPlayer();
