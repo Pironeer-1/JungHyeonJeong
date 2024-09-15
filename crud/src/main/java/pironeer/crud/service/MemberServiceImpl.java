@@ -46,12 +46,10 @@ public class MemberServiceImpl implements MemberService{
     public MemberResponseDTO findByLoginId(String loginId, String password) {
         Member member = memberRepository.findByLoginId(loginId);
         if(member != null && member.getPassword().equals(password)){
-            System.out.println(member);
             return MemberResponseDTO.builder()
                     .member(member)
                     .build();
         }
-        System.out.println("fail");
         return null;
     }
 }
