@@ -1,4 +1,4 @@
-package pironeer.crud.service;
+package pironeer.crud.service.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,13 +6,14 @@ import pironeer.crud.dto.reqeust.MemberFormDTO;
 import pironeer.crud.dto.response.MemberResponseDTO;
 import pironeer.crud.repository.MemberRepository;
 import pironeer.crud.repository.domain.Member;
+import pironeer.crud.service.member.MemberService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
 

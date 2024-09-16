@@ -1,4 +1,4 @@
-package pironeer.crud.service;
+package pironeer.crud.service.post;
 
 import pironeer.crud.dto.reqeust.PostUpdateRequestDTO;
 import pironeer.crud.dto.reqeust.PostWriteRequestDTO;

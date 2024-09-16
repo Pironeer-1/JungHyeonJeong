@@ -1,4 +1,4 @@
-package pironeer.crud.service;
+package pironeer.crud.service.member;
 
 import pironeer.crud.dto.reqeust.MemberFormDTO;
 import pironeer.crud.dto.response.MemberResponseDTO;

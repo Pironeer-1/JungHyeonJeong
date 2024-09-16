@@ -1,4 +1,4 @@
-package pironeer.crud.service;
+package pironeer.crud.service.post;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
@@ -26,8 +26,6 @@ public class PostServiceImpl implements PostService{
         Post post = Post.builder()
                 .title(postWriteRequestDTO.getTitle())
                 .content(postWriteRequestDTO.getContent())
-                .createdAt(postWriteRequestDTO.getCreatedAt())
-                .updatedAt(postWriteRequestDTO.getUpdatedAt())
                 .member(member)
                 .build();
         postRepository.save(post);

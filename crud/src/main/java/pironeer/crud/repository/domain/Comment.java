@@ -10,35 +10,27 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Builder
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-public class Post {
+@AllArgsConstructor
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postId;
+    private Long commentId;
 
     @NotNull
-    private String title;
-
     private String content;
 
     @NotNull
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @NotNull
-    @Builder.Default
-    private LocalDateTime updatedAt = LocalDateTime.now();
-
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    public void update(String title, String content){
-        this.title = title;
-        this.content = content;
-        this.updatedAt = LocalDateTime.now();
-    }
+    @ManyToOne
+    @JoinColumn(name = "POST_ID")
+    private Post post;
 }

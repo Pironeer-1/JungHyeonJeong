@@ -7,18 +7,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pironeer.crud.dto.reqeust.MemberFormDTO;
 import pironeer.crud.dto.response.MemberResponseDTO;
-import pironeer.crud.service.MemberService;
+import pironeer.crud.service.member.MemberService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/members")
+@RequestMapping("/member")
 public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/new")
-    public ResponseEntity<?> createMember(@RequestBody MemberFormDTO memberFormDTO){
+    public ResponseEntity<Long> createMember(@RequestBody MemberFormDTO memberFormDTO){
         Long memberId = memberService.join(memberFormDTO);
         return ResponseEntity.ok(memberId);
     }

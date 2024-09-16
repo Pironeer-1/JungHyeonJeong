@@ -8,7 +8,7 @@ import pironeer.crud.dto.reqeust.PostUpdateRequestDTO;
 import pironeer.crud.dto.reqeust.PostWriteRequestDTO;
 import pironeer.crud.dto.response.MemberResponseDTO;
 import pironeer.crud.dto.response.PostResponseDTO;
-import pironeer.crud.service.PostService;
+import pironeer.crud.service.post.PostService;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("/write")
-    public ResponseEntity<?> write(@RequestBody PostWriteRequestDTO postWriteRequestDTO, HttpSession session){
+    public ResponseEntity<Long> write(@RequestBody PostWriteRequestDTO postWriteRequestDTO, HttpSession session){
         MemberResponseDTO memberResponseDTO = (MemberResponseDTO) session.getAttribute("user");
         Long postId = postService.savePost(postWriteRequestDTO, memberResponseDTO.getLoginId());
         return ResponseEntity.ok(postId);
@@ -28,7 +28,7 @@ public class PostController {
     @GetMapping("/{postId}")
     public ResponseEntity<PostResponseDTO> read(@PathVariable ("postId") Long postId){
         PostResponseDTO postResponseDTO = postService.readPost(postId);
-        return ResponseEntity.ok().body(postResponseDTO);
+        return ResponseEntity.ok(postResponseDTO);
     }
 
     @GetMapping("/")
