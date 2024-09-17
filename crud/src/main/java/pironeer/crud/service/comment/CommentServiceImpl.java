@@ -11,9 +11,7 @@ import pironeer.crud.repository.domain.Comment;
 import pironeer.crud.repository.domain.Member;
 import pironeer.crud.repository.domain.Post;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -26,10 +24,19 @@ public class CommentServiceImpl implements CommentService{
     public Long writeComment(CommentWriteRequestDTO commentWriteRequestDTO, String loginId) {
         Member member = memberRepository.findByLoginId(loginId);
         Optional<Post> post = postRepository.findById(commentWriteRequestDTO.getPostId());
+        Optional<Comment> parent;
+        if(commentWriteRequestDTO.getParentId() == null){
+            parent = Optional.empty();
+        }
+        else{
+            parent = commentRepository.findById(commentWriteRequestDTO.getParentId());
+        }
+
         Comment comment = Comment.builder()
                 .content(commentWriteRequestDTO.getContent())
                 .member(member)
                 .post(post.get())
+                .parent(parent.orElse(null))
                 .build();
         commentRepository.save(comment);
         return comment.getCommentId();
@@ -40,14 +47,22 @@ public class CommentServiceImpl implements CommentService{
         Optional<Post> post = postRepository.findById(postId);
         List<Comment> all = commentRepository.findByPost(post.get());
         List<CommentResponseDTO> commentList = new ArrayList<>();
+        Map<Long, CommentResponseDTO> commentHashMap = new HashMap<>();
 
-        for(Comment comment : all){
+        for(Comment comment : all) {
             CommentResponseDTO build = CommentResponseDTO.builder()
                     .comment(comment)
                     .build();
-            commentList.add(build);
-        }
+            commentHashMap.put(build.getCommentId(), build);
 
+            if(comment.getParent() != null){
+                CommentResponseDTO parentDTO = commentHashMap.get(comment.getParent().getCommentId());
+                if (parentDTO != null) parentDTO.getChildren().add(build);
+            }
+            else{
+                commentList.add(build);
+            }
+        }
         return commentList;
     }
 }

@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class CommentWriteRequestDTO {
     private Long postId;
+    private Long parentId;
     private String content;
 }
