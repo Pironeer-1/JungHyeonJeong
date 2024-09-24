@@ -1,6 +1,6 @@
-package com.pironeer.week2_1.dto.response;
+package com.pironeer.week3.dto.response;
 
-import com.pironeer.week2_1.repository.domain.Topic;
+import com.pironeer.week3.repository.domain.Topic;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

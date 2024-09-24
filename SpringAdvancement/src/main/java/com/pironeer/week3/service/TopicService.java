@@ -1,16 +1,14 @@
-package com.pironeer.week2_1.service;
+package com.pironeer.week3.service;
 
-import com.pironeer.week2_1.dto.request.TopicCreateRequest;
-import com.pironeer.week2_1.dto.request.TopicUpdateRequest;
-import com.pironeer.week2_1.dto.response.TopicResponse;
-import com.pironeer.week2_1.mapper.TopicMapper;
-import com.pironeer.week2_1.repository.TopicRepository;
-import com.pironeer.week2_1.repository.domain.Topic;
+import com.pironeer.week3.dto.request.TopicCreateRequest;
+import com.pironeer.week3.dto.request.TopicUpdateRequest;
+import com.pironeer.week3.dto.response.TopicResponse;
+import com.pironeer.week3.mapper.TopicMapper;
+import com.pironeer.week3.repository.TopicRepository;
+import com.pironeer.week3.repository.domain.Topic;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

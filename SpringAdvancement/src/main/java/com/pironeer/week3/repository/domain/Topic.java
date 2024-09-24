@@ -1,6 +1,6 @@
-package com.pironeer.week2_1.repository.domain;
+package com.pironeer.week3.repository.domain;
 
-import com.pironeer.week2_1.dto.request.TopicUpdateRequest;
+import com.pironeer.week3.dto.request.TopicUpdateRequest;
 import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
-package com.pironeer.week2_1.repository;
+package com.pironeer.week3.repository;
 
-import com.pironeer.week2_1.repository.domain.Topic;
+import com.pironeer.week3.repository.domain.Topic;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 

@@ -1,4 +1,4 @@
-package com.pironeer.week2_1.config;
+package com.pironeer.week3.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -7,12 +7,12 @@ import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Pironeer Week2 API 명세서",
+                title = "Pironeer Week3 API 명세서",
                 description = "API 명세서",
                 version = "v1",
                 contact = @Contact(
-                        name = "양원채",
-                        email = "ywonchae62@gmail.com"
+                        name = "정현정",
+                        email = "cathy2750@naver.com"
                 )
         )
 )
