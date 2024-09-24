@@ -16,8 +16,9 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public void save(BoardCreateRequest request){
-        boardRepository.save(BoardMapper.from(request));
+    public Long save(BoardCreateRequest request){
+        Board savedBoard = boardRepository.save(BoardMapper.from(request));
+        return savedBoard.getId();
     }
 
     public BoardResponse findById(Long id){
@@ -38,7 +39,8 @@ public class BoardService {
         return BoardResponse.of(board);
     }
 
-    public void deleteById(Long id){
-        boardRepository.deleteById(id);
+    public Long deleteById(Long id){
+        Long deletedId = boardRepository.deleteById(id);
+        return deletedId;
     }
 }

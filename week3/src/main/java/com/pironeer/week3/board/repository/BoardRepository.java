@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository {
-    void save(Board board);
+    Board save(Board board);
     Optional<Board> findById(Long id);
     List<Board> findAll();
-    void deleteById(Long id);
+    Long deleteById(Long id);
 }

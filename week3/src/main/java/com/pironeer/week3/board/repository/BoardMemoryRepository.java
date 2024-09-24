@@ -16,14 +16,16 @@ public class BoardMemoryRepository implements BoardRepository{
     private final Map<Long, Board> boardMap = new HashMap<>();
 
     @Override
-    public void save(Board board) {
+    public Board save(Board board) {
         if(board.getId() == null){
             Long id = boardIdxGenerator.incrementAndGet();
             board.setId(id);
             boardMap.put(id, board);
+            return board;
         }
         else{
             boardMap.replace(board.getId(), board);
+            return board;
         }
     }
 
@@ -39,8 +41,9 @@ public class BoardMemoryRepository implements BoardRepository{
     }
 
     @Override
-    public void deleteById(Long id) {
+    public Long deleteById(Long id) {
         Assert.notNull(id, "ID MUST NOT BE NULL");
         boardMap.remove(id);
+        return id;
     }
 }

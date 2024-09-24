@@ -22,9 +22,9 @@ public class BoardController {
 
     @PostMapping
     @Operation(summary = "게시물 작성")
-    public ResponseEntity<?> create(@Valid @RequestBody BoardCreateRequest request){
-        boardService.save(request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> create(@Valid @RequestBody BoardCreateRequest request){
+        Long saveId = boardService.save(request);
+        return ResponseEntity.ok().body(saveId);
     }
 
     @GetMapping("/{topicId}")
@@ -50,8 +50,8 @@ public class BoardController {
 
     @DeleteMapping("/{topicId}")
     @Operation(summary = "게시물 삭제")
-    public ResponseEntity<?> remove(@PathVariable("topicId") Long id){
-        boardService.deleteById(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> remove(@PathVariable("topicId") Long id){
+        Long deleteId = boardService.deleteById(id);
+        return ResponseEntity.ok().body(deleteId);
     }
 }
