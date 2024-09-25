@@ -6,6 +6,11 @@ import com.pironeer.week3.board.dto.response.BoardResponse;
 import com.pironeer.week3.board.entity.Board;
 import com.pironeer.week3.board.mapper.BoardMapper;
 import com.pironeer.week3.board.repository.BoardRepository;
+import com.pironeer.week3.global.dto.response.result.ListResult;
+import com.pironeer.week3.global.dto.response.result.SingleResult;
+import com.pironeer.week3.global.exception.CustomException;
+import com.pironeer.week3.global.exception.ErrorCode;
+import com.pironeer.week3.global.service.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,31 +21,35 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public Long save(BoardCreateRequest request){
+    public SingleResult<Long> save(BoardCreateRequest request){
         Board savedBoard = boardRepository.save(BoardMapper.from(request));
-        return savedBoard.getId();
+        return ResponseService.getSingleResult(savedBoard.getId());
     }
 
-    public BoardResponse findById(Long id){
+    public SingleResult<BoardResponse> findById(Long id){
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
-        return BoardResponse.of(board);
+                .orElseThrow(() -> new CustomException(ErrorCode.BOARD_NOT_FOUND));
+        BoardResponse boardResponse = BoardResponse.of(board);
+        return ResponseService.getSingleResult(boardResponse);
     }
 
-    public List<BoardResponse> findAll(){
+    public ListResult<BoardResponse> findAll(){
         List<Board> boards = boardRepository.findAll();
-        return boards.stream().map(BoardResponse::of).toList();
+        List<BoardResponse> list = boards.stream().map(BoardResponse::of).toList();
+        return ResponseService.getListResult(list);
     }
 
-    public BoardResponse update(BoardUpdateRequest request){
+    public SingleResult<BoardResponse> update(BoardUpdateRequest request){
         Board board = boardRepository.findById(request.id())
-                .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
-        boardRepository.save(board.update(request));
-        return BoardResponse.of(board);
+                .orElseThrow(() -> new CustomException(ErrorCode.BOARD_NOT_FOUND));
+
+        Board updatedBoard = boardRepository.save(board.update(request));
+        BoardResponse boardResponse = BoardResponse.of(updatedBoard);
+        return ResponseService.getSingleResult(boardResponse);
     }
 
-    public Long deleteById(Long id){
+    public SingleResult<Long> deleteById(Long id){
         Long deletedId = boardRepository.deleteById(id);
-        return deletedId;
+        return ResponseService.getSingleResult(deletedId);
     }
 }
