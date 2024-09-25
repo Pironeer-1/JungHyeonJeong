@@ -25,7 +25,9 @@ public class BoardController {
 
     @PostMapping
     @Operation(summary = "게시물 작성")
-    public SuccessResponse<SingleResult<Long>> create(@Valid @RequestBody BoardCreateRequest request){
+    public SuccessResponse<SingleResult<Long>> create(
+            @RequestAttribute("id") String userId,
+            @Valid @RequestBody BoardCreateRequest request){
         SingleResult<Long> save = boardService.save(request);
         return SuccessResponse.ok(save);
     }
